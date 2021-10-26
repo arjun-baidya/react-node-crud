@@ -7,12 +7,18 @@ const AddUser = () => {
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const newUser = {name,email}
-        fetch('',{
+        fetch('http://localhost:5000/users',{
             method:'post',
             headers:{'content-type':'application/json', },
             body: JSON.stringify(newUser)
         })
-        .then()
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.insertedId){
+                alert('Successfully added the user')
+                e.target.reset();
+            }
+        })
 
         e.preventDefault();
     }
